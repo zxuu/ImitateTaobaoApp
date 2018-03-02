@@ -1,6 +1,7 @@
 package com.zxu.cniao5shop.fragment;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -12,21 +13,28 @@ import android.support.v7.widget.ViewUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.cjj.MaterialRefreshLayout;
 import com.cjj.MaterialRefreshListener;
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.squareup.okhttp.Response;
 import com.zxu.cniao5shop.Contants;
 import com.zxu.cniao5shop.R;
 import com.zxu.cniao5shop.adapter.DividerItemDecortion;
+import com.zxu.cniao5shop.adapter.HWAdatper;
 import com.zxu.cniao5shop.adapter.HotWaresAdapter;
+import com.zxu.cniao5shop.adapter.baseadapter.BaseAdapter;
+import com.zxu.cniao5shop.adapter.baseadapter.BaseViewHolder;
+import com.zxu.cniao5shop.adapter.baseadapter.SimpleAdapter;
 import com.zxu.cniao5shop.bean.hotbean.Page;
 import com.zxu.cniao5shop.bean.hotbean.Wares;
 import com.zxu.cniao5shop.http.OkHttpHelper;
 import com.zxu.cniao5shop.http.SpotsCallBack;
 
+import java.net.URL;
 import java.util.List;
 
 
@@ -35,7 +43,7 @@ import java.util.List;
  */
 public class HotFragment extends Fragment{
 
-    private HotWaresAdapter mAdapter;
+    private HWAdatper mAdapter;
 
 
 //    @ViewInject(R.id.recyclerview_hot)
@@ -145,12 +153,20 @@ public class HotFragment extends Fragment{
 
         switch (state) {
             case STATE_NORMAL:
-                mAdapter = new HotWaresAdapter(datas);
+                mAdapter = new HWAdatper(getContext(),datas);
+                mAdapter.setOnItemClickListener(new BaseAdapter.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(View view, int position) {
+
+                    }
+                });
+
                 mRecyclerView.setAdapter(mAdapter);
                 mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
                 // 设计动画
                 mRecyclerView.setItemAnimator(new DefaultItemAnimator());
                 mRecyclerView.addItemDecoration(new DividerItemDecortion());
+
                 break;
             case STATE_REFREH:
                 mAdapter.clearData();
