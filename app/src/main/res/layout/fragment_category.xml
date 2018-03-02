@@ -1,15 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="@dimen/basicPaddingSize">
 
 
-
-    <TextView
-        android:layout_width="fill_parent"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerview_category"
+        android:layout_width="120dp"
         android:layout_height="fill_parent"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:text="Cagory"/>
+        android:background="@color/white"
+        >
+    </android.support.v7.widget.RecyclerView>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginLeft="2dp"
+        >
+
+
+        <com.daimajia.slider.library.SliderLayout
+            android:id="@+id/slider_category"
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            custom:pager_animation="Accordion"
+            custom:auto_cycle="true"
+            custom:indicator_visibility="visible"
+            custom:pager_animation_span="1100"
+            />
+
+
+
+
+
+        <com.cjj.MaterialRefreshLayout
+            android:id="@+id/refresh_layout_category"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            app:overlay="false"
+            app:wave_show="false"
+            app:wave_height_type="higher"
+            app:progress_show_circle_backgroud="false"
+            >
+
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerview_wares"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+
+            </android.support.v7.widget.RecyclerView>
+
+
+
+        </com.cjj.MaterialRefreshLayout>
+
+
+    </LinearLayout>
+
+
 
 </LinearLayout>
