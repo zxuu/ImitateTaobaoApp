@@ -12,6 +12,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -19,9 +20,7 @@ import android.widget.TextView;
 import com.zxu.cniao5shop.R;
 
 
-/**
- * Created by Ivan on 15/9/28.
- */
+
 public class CnToolbar extends Toolbar {
 
 
@@ -31,7 +30,7 @@ public class CnToolbar extends Toolbar {
     private View mView;
     private TextView mTextTitle;
     private EditText mSearchView;
-    private ImageButton mRightImageButton;
+    private Button mRightButton;
 
 
     public CnToolbar(Context context) {
@@ -90,7 +89,7 @@ public class CnToolbar extends Toolbar {
 
             mTextTitle = (TextView) mView.findViewById(R.id.toolbar_title);
             mSearchView = (EditText) mView.findViewById(R.id.toolbar_searchview);
-            mRightImageButton = (ImageButton) mView.findViewById(R.id.toolbar_rightButton);
+            mRightButton = (Button) mView.findViewById(R.id.toolbar_rightButton);
 
             //---------------------
             LayoutParams lp = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, Gravity.CENTER_HORIZONTAL);
@@ -105,10 +104,10 @@ public class CnToolbar extends Toolbar {
 
     public void  setRightButtonIcon(Drawable icon){
 
-        if(mRightImageButton !=null){
+        if(mRightButton !=null){
 
-            mRightImageButton.setImageDrawable(icon);
-            mRightImageButton.setVisibility(VISIBLE);
+            mRightButton.setBackground(icon);
+            mRightButton.setVisibility(VISIBLE);
         }
 
     }
@@ -116,7 +115,7 @@ public class CnToolbar extends Toolbar {
     // button监听事件
     public  void setRightButtonOnClickListener(OnClickListener li){
 
-        mRightImageButton.setOnClickListener(li);
+        mRightButton.setOnClickListener(li);
     }
 
 
@@ -181,6 +180,22 @@ public class CnToolbar extends Toolbar {
 //            mRightImageButton.setLayoutParams(lp);
 //        }
 //    }
+
+
+    public Button getRightButton() {
+
+        return this.mRightButton;
+    }
+
+
+    public void setRightButtonText(CharSequence text){
+        mRightButton.setText(text);
+        mRightButton.setVisibility(VISIBLE);
+    }
+
+    public void setRightButtonText(int id){
+        setRightButtonText(getResources().getString(id));
+    }
 
 
 }

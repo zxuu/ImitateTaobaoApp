@@ -1,5 +1,6 @@
 package com.zxu.cniao5shop;
 
+import android.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -17,6 +18,7 @@ import com.zxu.cniao5shop.fragment.CategoryFragment;
 import com.zxu.cniao5shop.fragment.HomeFragment;
 import com.zxu.cniao5shop.fragment.HotFragment;
 import com.zxu.cniao5shop.fragment.MineFragment;
+import com.zxu.cniao5shop.widget.CnToolbar;
 import com.zxu.cniao5shop.widget.FragmentTabHost;
 
 import java.util.ArrayList;
@@ -26,13 +28,15 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
+    CartFragment cartFragment;
+
 
 
     private LayoutInflater mInflater;
 
     private FragmentTabHost mTabhost;
 
-    private Toolbar mToolbar;
+    private CnToolbar mToolbar;
 
 
     private List<Tab> mTabs = new ArrayList<>(5);
@@ -48,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initToolBar() {
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        mToolbar = (CnToolbar) findViewById(R.id.toolbar);
     }
 
     private void initTab() {
@@ -82,10 +86,42 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
+        mTabhost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
+            @Override
+            public void onTabChanged(String s) {
+                if (s == getString(R.string.cart)) {
+
+                    refData();
+
+                } else {
+                    mToolbar.showSearchView();
+                    mToolbar.hideTitleView();
+                    mToolbar.getRightButton().setVisibility(View.GONE);
+                }
+            }
+        });
+
         mTabhost.getTabWidget().setShowDividers(LinearLayout.SHOW_DIVIDER_NONE);
         mTabhost.setCurrentTab(0);
 
 
+    }
+
+    private void refData() {
+        if (cartFragment == null) {
+
+            android.support.v4.app.Fragment fragment = getSupportFragmentManager().findFragmentByTag(getString(R.string.cart));
+
+            if (fragment != null) {
+
+                CartFragment cartFragment = (CartFragment) fragment;
+                // 第一次刷新初始化
+                cartFragment.refData();
+            }
+
+        } else {
+            cartFragment.refData();
+        }
     }
 
 
