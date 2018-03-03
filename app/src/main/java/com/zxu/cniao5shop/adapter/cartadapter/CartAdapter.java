@@ -196,7 +196,7 @@ public class CartAdapter extends SimpleAdapter<ShoppingCart> implements BaseAdap
 //                notifyItemRemoved(position);
 //            }
 //        }
-
+//        在循环当中不能删除item
 
         for(Iterator iterator = datas.iterator();iterator.hasNext();){
 

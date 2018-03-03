@@ -93,7 +93,8 @@ public class MainActivity extends AppCompatActivity {
 
                     refData();
 
-                } else {
+                }
+                else {
                     mToolbar.showSearchView();
                     mToolbar.hideTitleView();
                     mToolbar.getRightButton().setVisibility(View.GONE);
