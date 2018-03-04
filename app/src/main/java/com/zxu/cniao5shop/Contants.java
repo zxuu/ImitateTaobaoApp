@@ -16,6 +16,8 @@ public class Contants {
     public  static final String DES_KEY="Cniao5_123456";
 
     public  static final int REQUEST_CODE=0;
+    public  static final int REQUEST_CODE_PAYMENT=1;
+
 
 
 
@@ -39,6 +41,13 @@ public class Contants {
 
         public static final String USER_DETAIL=BASE_URL +"user/get?id=1";
 
+
+        public static final String ORDER_CREATE=BASE_URL +"/order/create";
+        public static final String ORDER_COMPLEPE=BASE_URL +"/order/complete";
+
+        public static final String ADDRESS_LIST=BASE_URL +"addr/list";
+        public static final String ADDRESS_CREATE=BASE_URL +"addr/create";
+        public static final String ADDRESS_UPDATE=BASE_URL +"addr/update";
 
 
 

@@ -2,6 +2,7 @@ package com.zxu.cniao5shop.fragment;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -22,6 +23,7 @@ import com.lidroid.xutils.view.annotation.ViewInject;
 import com.lidroid.xutils.view.annotation.event.OnClick;
 import com.squareup.okhttp.Response;
 import com.zxu.cniao5shop.Contants;
+import com.zxu.cniao5shop.CreateOrderActivity;
 import com.zxu.cniao5shop.MainActivity;
 import com.zxu.cniao5shop.R;
 import com.zxu.cniao5shop.adapter.cartadapter.CartAdapter;
@@ -37,7 +39,7 @@ import java.util.List;
 import static com.zxu.cniao5shop.http.OkHttpHelper.TAG;
 
 
-public class CartFragment extends Fragment implements View.OnClickListener{
+public class CartFragment extends BaseFragment implements View.OnClickListener{
 
     public static final int ACTION_EDIT=1;
     public static final int ACTION_CAMPLATE=2;
@@ -67,24 +69,40 @@ public class CartFragment extends Fragment implements View.OnClickListener{
     private OkHttpHelper httpHelper = OkHttpHelper.getInstance();
 
 
-    @Nullable
+//    @Nullable
+//    @Override
+//    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+//
+//
+//
+//        View view = inflater.inflate(R.layout.fragment_cart,container,false);
+//
+//        ViewUtils.inject(this,view);
+//
+//
+//        cartProvider = new CartProvider(getContext());
+//
+//        showData();
+//
+//        return  view;
+//    }
+
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View createView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.fragment_cart,container,false);
 
-
-
-        View view = inflater.inflate(R.layout.fragment_cart,container,false);
-
-        ViewUtils.inject(this,view);
-
-
-        cartProvider = new CartProvider(getContext());
-
-        showData();
-
-        return  view;
     }
 
+    @Override
+    public void init() {
+
+        cartProvider = new CartProvider(getActivity());
+
+        changeToolbar();
+        showData();
+
+
+    }
 
 
     @OnClick(R.id.btn_del)
@@ -194,19 +212,28 @@ public class CartFragment extends Fragment implements View.OnClickListener{
 
     @OnClick(R.id.btn_order)
     public void toOrder(View view) {
-        httpHelper.get(Contants.API.USER_DETAIL, new SpotsCallBack<User>(getContext()) {
-            @Override
-            public void onSuccess(Response response, User user) {
+//        httpHelper.get(Contants.API.USER_DETAIL, new SpotsCallBack<User>(getContext()) {
+//            @Override
+//            public void onSuccess(Response response, User user) {
+//
+//                Log.d(TAG, "onSuccess: ");
+//            }
+//
+//            @Override
+//            public void onError(Response response, int code, Exception e) {
+//
+//                Log.d(TAG, "onError: ");
+//            }
+//        });
 
-                Log.d(TAG, "onSuccess: ");
-            }
+        Intent intent = new Intent(getActivity(), CreateOrderActivity.class);
 
-            @Override
-            public void onError(Response response, int code, Exception e) {
 
-                Log.d(TAG, "onError: ");
-            }
-        });
+        startActivity(intent,true);
     }
+
+
+
+
 
 }

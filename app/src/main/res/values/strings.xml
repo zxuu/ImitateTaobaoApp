@@ -27,4 +27,8 @@
 
     <string name="token_error">登录失效，请重新登录</string>
 
+    <string name="create_order">填写订单</string>
+
+    <string name="pay_result">支付结果</string>
+
 </resources>

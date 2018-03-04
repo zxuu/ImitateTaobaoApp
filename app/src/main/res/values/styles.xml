@@ -68,7 +68,7 @@
 
 
 
-    -<style name="editText_base">
+    <style name="editText_base">
 
     <item name="android:textSize">16sp</item>
 
@@ -90,6 +90,21 @@
     <style parent="editText_base" name="editText">
 
     <item name="android:background">@drawable/selector_edittext</item>
+
+</style>
+
+
+    <style name="radioButton">
+
+    <item name="android:background">@drawable/selector_checkbox_green</item>
+
+    <item name="android:button">@null</item>
+
+</style>
+
+    <style parent="@style/bigButton" name="bigGreenButton">
+
+    <item name="android:background">@drawable/bg_btn_style_green</item>
 
 </style>
 
