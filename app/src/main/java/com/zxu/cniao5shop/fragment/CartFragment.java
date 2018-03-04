@@ -9,6 +9,7 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,14 +20,21 @@ import android.widget.TextView;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.lidroid.xutils.view.annotation.event.OnClick;
+import com.squareup.okhttp.Response;
+import com.zxu.cniao5shop.Contants;
 import com.zxu.cniao5shop.MainActivity;
 import com.zxu.cniao5shop.R;
 import com.zxu.cniao5shop.adapter.cartadapter.CartAdapter;
 import com.zxu.cniao5shop.bean.gouwuche.ShoppingCart;
+import com.zxu.cniao5shop.http.OkHttpHelper;
+import com.zxu.cniao5shop.http.SpotsCallBack;
+import com.zxu.cniao5shop.mine.User;
 import com.zxu.cniao5shop.utils.CartProvider;
 import com.zxu.cniao5shop.widget.CnToolbar;
 
 import java.util.List;
+
+import static com.zxu.cniao5shop.http.OkHttpHelper.TAG;
 
 
 public class CartFragment extends Fragment implements View.OnClickListener{
@@ -55,6 +63,8 @@ public class CartFragment extends Fragment implements View.OnClickListener{
 
     private CartAdapter mAdapter;
     private CartProvider cartProvider;
+
+    private OkHttpHelper httpHelper = OkHttpHelper.getInstance();
 
 
     @Nullable
@@ -181,4 +191,22 @@ public class CartFragment extends Fragment implements View.OnClickListener{
         }
 
     }
+
+    @OnClick(R.id.btn_order)
+    public void toOrder(View view) {
+        httpHelper.get(Contants.API.USER_DETAIL, new SpotsCallBack<User>(getContext()) {
+            @Override
+            public void onSuccess(Response response, User user) {
+
+                Log.d(TAG, "onSuccess: ");
+            }
+
+            @Override
+            public void onError(Response response, int code, Exception e) {
+
+                Log.d(TAG, "onError: ");
+            }
+        });
+    }
+
 }

@@ -6,6 +6,7 @@ package com.zxu.cniao5shop.http;
 
 import android.os.Handler;
 import android.os.Looper;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.google.gson.Gson;
@@ -17,8 +18,10 @@ import com.squareup.okhttp.Request;
 import com.squareup.okhttp.RequestBody;
 import com.squareup.okhttp.Response;
 import com.squareup.okhttp.internal.framed.FrameReader;
+import com.zxu.cniao5shop.CniaoApplication;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.LogRecord;
@@ -170,6 +173,11 @@ public class OkHttpHelper {
 
     private Handler mHandler;
 
+    public static final int TOKEN_MISSING=401;
+    public static final int TOKEN_ERROR=402;
+    public static final int TOKEN_EXPIRE=403;
+
+
 
 
     static {
@@ -196,12 +204,19 @@ public class OkHttpHelper {
 
 
 
-    public void get(String url,BaseCallback callback){
+    public void get(String url,Map<String,String> param,BaseCallback callback){
 
 
-        Request request = buildGetRequest(url);
+        Request request = buildGetRequest(url,param);
 
         request(request,callback);
+
+    }
+
+    public void get(String url, BaseCallback callback){
+
+
+        get(url,null,callback);
 
     }
 
@@ -252,6 +267,9 @@ public class OkHttpHelper {
                             callback.onError(response,response.code(),e);
                         }
                     }
+                } else if (response.code() == TOKEN_ERROR||response.code() == TOKEN_EXPIRE||
+                        response.code() == TOKEN_MISSING) {
+                    callbackTokenError(callback,response);
                 }
                 else {
                     callbackError(callback,response,null);
@@ -263,6 +281,15 @@ public class OkHttpHelper {
 
     }
 
+    private void callbackTokenError(final  BaseCallback callback , final Response response){
+
+        mHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                callback.onTokenError(response,response.code());
+            }
+        });
+    }
 
     private void callbackSuccess(final  BaseCallback callback , final Response response, final Object obj ){
 
@@ -292,9 +319,12 @@ public class OkHttpHelper {
         return  buildRequest(url,HttpMethodType.POST,params);
     }
 
-    private  Request buildGetRequest(String url){
 
-        return  buildRequest(url,HttpMethodType.GET,null);
+
+
+    private  Request buildGetRequest(String url,Map<String,String> param){
+
+        return  buildRequest(url,HttpMethodType.GET,param);
     }
 
     private  Request buildRequest(String url,HttpMethodType methodType,Map<String,String> params){
@@ -308,6 +338,10 @@ public class OkHttpHelper {
             builder.post(body);
         }
         else if(methodType == HttpMethodType.GET){
+
+
+            url = buildUrlParams(url, params);
+            builder.url(url);
             builder.get();
         }
 
@@ -328,6 +362,10 @@ public class OkHttpHelper {
 
                 builder.add(entry.getKey(),entry.getValue());
             }
+            String token = CniaoApplication.getInstance().getToken();
+            if (!TextUtils.isEmpty(token)) {
+                builder.add("token", token);
+            }
         }
 
         return  builder.build();
@@ -343,6 +381,36 @@ public class OkHttpHelper {
 
     }
 
+
+    // 拼接url
+    private   String buildUrlParams(String url ,Map<String,String> params) {
+
+        if(params == null)
+            params = new HashMap<>(1);
+
+        String token = CniaoApplication.getInstance().getToken();
+        if(!TextUtils.isEmpty(token))
+            params.put("token",token);
+
+
+        StringBuffer sb = new StringBuffer();
+        for (Map.Entry<String, String> entry : params.entrySet()) {
+            sb.append(entry.getKey() + "=" + entry.getValue());
+            sb.append("&");
+        }
+        String s = sb.toString();
+        if (s.endsWith("&")) {
+            s = s.substring(0, s.length() - 1);
+        }
+
+        if(url.indexOf("?")>0){
+            url = url +"&"+s;
+        }else{
+            url = url +"?"+s;
+        }
+
+        return url;
+    }
 
 
 }

@@ -3,8 +3,20 @@
 
     <declare-styleable name="CnToolbar">
 
+
         <attr name="rightButtonIcon" format="reference"/>
         <attr name="isShowSearchView" format="boolean"/>
 
     </declare-styleable>
+
+
+    <declare-styleable name="CNiaoToolBar">
+
+    <attr name="rcightButtonIcon" format="reference"/>
+
+    <attr name="icsShowSearchView" format="boolean"/>
+
+    <attr name="rcightButtonText" format="string"/>
+
+</declare-styleable>
 </resources>

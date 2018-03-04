@@ -325,8 +325,10 @@
     <color name="toast_color">#ff2E76B9</color>
     <color name="login_button">#ff775025</color>
 
+    <color name="grey_btn_color_normal">#fff1f1f1</color>
     <color name="grey_btn_color_pressed">#ffd8d8d8</color>
     <color name="grey_btn_color_disable">#7fd8d8d8</color>
 
 
+    <color name="border_color">#a9b7b7</color>
 </resources>
