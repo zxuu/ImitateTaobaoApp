@@ -25,6 +25,7 @@ import com.squareup.okhttp.Response;
 import com.zxu.cniao5shop.Contants;
 import com.zxu.cniao5shop.CreateOrderActivity;
 import com.zxu.cniao5shop.MainActivity;
+import com.zxu.cniao5shop.PayResultActivity;
 import com.zxu.cniao5shop.R;
 import com.zxu.cniao5shop.adapter.cartadapter.CartAdapter;
 import com.zxu.cniao5shop.bean.gouwuche.ShoppingCart;
@@ -32,6 +33,7 @@ import com.zxu.cniao5shop.http.OkHttpHelper;
 import com.zxu.cniao5shop.http.SpotsCallBack;
 import com.zxu.cniao5shop.mine.User;
 import com.zxu.cniao5shop.utils.CartProvider;
+import com.zxu.cniao5shop.widget.CNiaoToolBar;
 import com.zxu.cniao5shop.widget.CnToolbar;
 
 import java.util.List;
@@ -60,7 +62,9 @@ public class CartFragment extends BaseFragment implements View.OnClickListener{
     @ViewInject(R.id.btn_del)
     private Button mBtnDel;
 
-    private CnToolbar mToolbar;
+
+    @ViewInject(R.id.toolbar)
+    protected CnToolbar mToolbar;
 
 
     private CartAdapter mAdapter;
@@ -140,7 +144,7 @@ public class CartFragment extends BaseFragment implements View.OnClickListener{
 
         super.onAttach(context);
 
-        if (context instanceof MainActivity) {
+        if (context instanceof MainActivity ) {
             MainActivity activity = (MainActivity) context;
 
             mToolbar = (CnToolbar) activity.findViewById(R.id.toolbar);
