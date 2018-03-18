@@ -7,10 +7,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-/**
- * Created by <a href="http://www.cniao5.com">菜鸟窝</a>
- * 一个专业的Android开发在线教育平台
- */
+
 public class BaseViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
 

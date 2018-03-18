@@ -2,10 +2,7 @@ package com.zxu.cniao5shop.bean.hotbean;
 
 import java.io.Serializable;
 
-/**
- * Created by <a href="http://www.cniao5.com">菜鸟窝</a>
- * 一个专业的Android开发在线教育平台
- */
+
 public class Wares implements Serializable {
 
 

@@ -180,7 +180,11 @@ public class CategoryFragment extends Fragment {
             @Override
             public void onItemClick(View view, int position) {
 
+                //////////////////// getPosition //////////////////////
+
                 Category category = mCategoryAdapter.getItem(position);
+
+                ///////////////////////////////////////////////////////
 
                 category_id = category.getId();
                 currPage=1;

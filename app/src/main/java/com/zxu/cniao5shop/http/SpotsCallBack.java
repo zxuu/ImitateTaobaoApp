@@ -28,7 +28,7 @@ public abstract class SpotsCallBack<T> extends BaseCallback<T> {
 
     public SpotsCallBack(Context context) {
         mContext = context;
-         mDialog = new SpotsDialog(context);
+        mDialog = new SpotsDialog(context,"拼命加载中...");
     }
 
     private void initSpotsDialog() {

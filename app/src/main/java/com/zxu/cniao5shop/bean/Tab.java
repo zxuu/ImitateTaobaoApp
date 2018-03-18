@@ -1,8 +1,6 @@
 package com.zxu.cniao5shop.bean;
 
-/**
- * Created by Ivan on 15/9/25.
- */
+
 public class Tab {
 
     private  int title;

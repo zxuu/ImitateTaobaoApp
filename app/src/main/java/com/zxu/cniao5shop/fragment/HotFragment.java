@@ -88,12 +88,15 @@ public class HotFragment extends Fragment{
     private void initRefreshLayout() {
         mRefreshLayout.setLoadMore(true);
         mRefreshLayout.setMaterialRefreshListener(new MaterialRefreshListener() {
+
+            //下拉刷新
             @Override
             public void onRefresh(MaterialRefreshLayout materialRefreshLayout) {
 
                 refreshData();
             }
 
+            //上拉加载更多
             @Override
             public void onRefreshLoadMore(MaterialRefreshLayout materialRefreshLayout) {
 

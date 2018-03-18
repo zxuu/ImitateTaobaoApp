@@ -9,7 +9,7 @@ import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 
 /**
- * Created by zx on 2018/2/28.
+ * Created by zxu on 2018/2/28.
  */
 
 public abstract class BaseCallback<T> {
@@ -36,7 +36,6 @@ public abstract class BaseCallback<T> {
 
     public abstract void onRequestBefore(Request request);
 
-
     public abstract void onFailure(Request request, IOException e);
 
     /**
@@ -46,6 +45,7 @@ public abstract class BaseCallback<T> {
     public abstract  void onResponse(Response response);
 
     public abstract void onSuccess(Response response,T t);
+
     public abstract void onError(Response response,int code,Exception e);
 
     /**

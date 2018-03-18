@@ -9,11 +9,9 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by <a href="http://www.cniao5.com">菜鸟窝</a>
- * 一个专业的Android开发在线教育平台
- */
-public abstract class BaseAdapter<T,H extends  BaseViewHolder> extends RecyclerView.Adapter<BaseViewHolder>{
+
+public abstract class BaseAdapter<T,H extends  BaseViewHolder> extends
+        RecyclerView.Adapter<BaseViewHolder>{
 
 
 
@@ -28,13 +26,9 @@ public abstract class BaseAdapter<T,H extends  BaseViewHolder> extends RecyclerV
 
     private OnItemClickListener mOnItemClickListener = null;
 
-
-
     public  interface OnItemClickListener {
         void onItemClick(View view, int position);
     }
-
-
 
     public BaseAdapter(Context context, int layoutResId) {
         this(context, layoutResId, null);

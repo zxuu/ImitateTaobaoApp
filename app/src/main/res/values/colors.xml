@@ -2,7 +2,7 @@
 <resources>
 
     <color name="colorPrimary">#eb4f38</color>
-    <color name="colorPrimaryDark">#009688</color>
+    <color name="colorPrimaryDark">#eb4f38</color>
 
 
     <color name="red_btn_color_normal">#ffff5454</color>

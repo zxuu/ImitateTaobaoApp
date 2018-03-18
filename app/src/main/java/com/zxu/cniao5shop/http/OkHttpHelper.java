@@ -187,15 +187,17 @@ public class OkHttpHelper {
     private OkHttpHelper(){
 
         mHttpClient = new OkHttpClient();
+
         mHttpClient.setConnectTimeout(10, TimeUnit.SECONDS);
         mHttpClient.setReadTimeout(10,TimeUnit.SECONDS);
         mHttpClient.setWriteTimeout(30,TimeUnit.SECONDS);
 
         mGson = new Gson();
 
-        mHandler = new Handler(Looper.getMainLooper());
+        mHandler = new Handler(Looper.getMainLooper()); //主要接受子线程发送的数据， 并用此数据配合主线程
+        // 更新UI
 
-    };
+    }
 
     public static  OkHttpHelper getInstance(){
         return  mInstance;
@@ -252,7 +254,7 @@ public class OkHttpHelper {
 
                     String resultStr = response.body().string();
 
-                    Log.d(TAG, "result=" + resultStr);
+//                    Log.d(TAG, "result=" + resultStr);
 
                     if (callback.mType == String.class){
                         callbackSuccess(callback,response,resultStr);
@@ -362,6 +364,8 @@ public class OkHttpHelper {
 
                 builder.add(entry.getKey(),entry.getValue());
             }
+
+
             String token = CniaoApplication.getInstance().getToken();
             if (!TextUtils.isEmpty(token)) {
                 builder.add("token", token);

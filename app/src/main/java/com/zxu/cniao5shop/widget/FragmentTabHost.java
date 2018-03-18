@@ -63,6 +63,8 @@ package com.zxu.cniao5shop.widget;
  * development/samples/Support4Demos/src/com/example/android/supportv4/app/
  * FragmentTabsFragmentSupport.java complete}
  */
+
+
 public class FragmentTabHost extends TabHost implements
         TabHost.OnTabChangeListener {
     private final ArrayList<TabInfo> mTabs = new ArrayList<TabInfo>();

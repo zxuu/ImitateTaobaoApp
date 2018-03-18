@@ -1,8 +1,6 @@
 package com.zxu.cniao5shop.bean;
 
-/**
- * Created by Ivan on 15/9/24.
- */
+
 public class Category extends BaseBean {
 
 

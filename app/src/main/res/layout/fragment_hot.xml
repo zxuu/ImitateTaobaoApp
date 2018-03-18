@@ -13,7 +13,7 @@
         android:layout_marginTop="10dp"
         app:overlay="true"
         app:wave_show="true"
-        app:wave_color="#90ffffff"
+        app:wave_color="#902fec7d"
         app:progress_colors="@array/material_colors"
         app:wave_height_type="higher"
         >
